@@ -1,4 +1,3 @@
-event-platform/uploads/
 *.log
 raw_keylog.cpp
 targets.txt
