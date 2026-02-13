@@ -1,23 +1,25 @@
-cmake_minimum_required(VERSION 3.10)
+# CMakeLists.txt for Keylogger Project
 
-# Set the project name
-project(Keylog)
+cmake_minimum_required(VERSION 3.0)
+project(Keylogger)
 
-# Specify the C++ standard
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Add the executable for each keylogger implementation
-# Assuming there are implementations in separate directories
-add_subdirectory(impl1)
-add_subdirectory(impl2)
-add_subdirectory(impl3)
+# Specify the source files for the project
+set(SOURCES
+    # Add your source files here
+    main.cpp
+    keylogger.cpp
+)
 
-# Find additional libraries if needed
-find_package(SomeRequiredLibrary REQUIRED)
+# Add executable
+add_executable(Keylogger ${SOURCES})
 
-# Include directories
-include_directories(include)
+# Link libraries
+if(WIN32)
+    target_link_libraries(Keylogger user32 gdi32 psapi winhttp)
+endif()
 
-# Set the output directory for the compiled binaries
+# Specify the output directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
