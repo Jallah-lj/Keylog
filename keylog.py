@@ -23,7 +23,10 @@ def on_press(key: keyboard.Key | keyboard.KeyCode) -> None:
 
 def main() -> None:
     with keyboard.Listener(on_press=on_press) as listener:
-        listener.join()
+        try:
+            listener.join()
+        except KeyboardInterrupt:
+            pass
 
 
 if __name__ == "__main__":
