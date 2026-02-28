@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "keylogger"
+version = "0.1.0"
+description = "Educational keylogger implementations in Python."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pynput==1.7.7",
+    "psutil==6.1.1",
+    "requests==2.32.3",
+]
+
+[project.scripts]
+keylog          = "keylog:main"
+keylog-advanced = "keylog_advanced:main"
+keylog-hook     = "keylog_hook:main"
+keylog-online   = "keylog_online:main"

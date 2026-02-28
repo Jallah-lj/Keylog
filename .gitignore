@@ -3,3 +3,12 @@ event-platform/uploads/
 raw_keylog.cpp
 targets.txt
 *.db
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+*.egg
