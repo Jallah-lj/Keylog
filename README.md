@@ -1,15 +1,49 @@
 # Keylogger Implementations
 
-This repository contains four different implementations of a keylogger for educational purposes.
+This repository contains four different implementations of a keylogger for educational purposes, available in both **Python** and **C++**.
 
 ## Implementations
 
+### Python
+| File | Description |
+|------|-------------|
+| `keylog.py` | Basic keylogging — appends every keystroke to `keylog.txt`. |
+| `keylog_advanced.py` | Advanced keylogging with timestamps, active process name, and window title. |
+| `keylog_hook.py` | Hook-based keylogger with human-readable labels for special keys. |
+| `keylog_online.py` | Buffers keystrokes and transmits them (Base64-encoded) to a remote server. |
+
+### C++
 1. **keylog.cpp**: Basic keylogging functionality.
 2. **keylog_advanced.cpp**: Advanced features including stealth mode.
 3. **keylog_online.cpp**: Keylogger that transmits data over the internet.
 4. **keylog_hook.cpp**: Uses Windows hooks to capture keystrokes.
 
-## Build Instructions
+## Python Build / Run Instructions
+
+### Prerequisites
+- Python 3.8 or newer
+
+### Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### Run
+```bash
+# Basic keylogger
+python keylog.py
+
+# Advanced keylogger (timestamps + process/window info)
+python keylog_advanced.py
+
+# Hook-based keylogger
+python keylog_hook.py
+
+# Online keylogger (edit SERVER_URL in keylog_online.py first)
+python keylog_online.py
+```
+
+## C++ Build Instructions
 
 ### Manual Compilation
 To compile the keylogger from the source code:
